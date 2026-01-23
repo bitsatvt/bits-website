@@ -2,22 +2,31 @@
 
 @theme {
   /* THE EXCLUSIVE DARK PALETTE */
-  --color-bits-bright-orange: #FF5508;    /* Vibrant Tech Orange */
-  --color-bits-orange: #EE4C00;    /* Vibrant Tech Orange */
-  --color-bits-yellow: #FACC15;    /* Accent Yellow */
-  --color-bits-red: #DC2626;       /* Deep Red */
-  --color-bits-dark: #0A0A0A;      /* Deep Black */
-  
+  --color-bits-bright-orange: #ff5508; /* Vibrant Tech Orange */
+  --color-bits-orange: #ee4c00; /* Vibrant Tech Orange */
+  --color-bits-yellow: #facc15; /* Accent Yellow */
+  --color-bits-red: #dc2626; /* Deep Red */
+  --color-bits-dark: #0a0a0a; /* Deep Black */
+  --color-bits-green: #53c73e; /* Bright Green */
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  
+
   /* Animation settings */
   --animate-blob: blob 10s infinite alternate;
-  
+
   @keyframes blob {
-    0% { transform: translate(0px, 0px) scale(1); }
-    33% { transform: translate(30px, -50px) scale(1.2); }
-    66% { transform: translate(-20px, 20px) scale(0.8); }
-    100% { transform: translate(0px, 0px) scale(1); }
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.2);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.8);
+    }
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
   }
 }
 

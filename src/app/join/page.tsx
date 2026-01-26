@@ -15,7 +15,7 @@ export default function Join() {
         
         <div className="text-center max-w-3xl mx-auto mb-20">
              <div className="inline-block px-4 py-1 rounded-full border border-white/10 bg-white/5 text-sm font-bold text-slate-300 mb-6 backdrop-blur-md">
-                Spring 2026 Applications Closed
+                Spring 2026 Applications Open Through February 9th
              </div>
              <h1 className="text-5xl md:text-7xl font-semibold tracking-tighter text-white mb-6">
                 Build the <span className="text-bits-bright-orange">Future</span>.
@@ -26,12 +26,18 @@ export default function Join() {
         </div>
 
         {/* Roles Grid */}
-        <div className="grid md:grid-cols-3 gap-6 mb-20">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-6 mb-20">
             <RoleCard 
                 title="Developer" 
                 icon={<Code2 className="w-8 h-8 text-bits-orange" />}
-                desc="Write production-ready code in React, Python, or Swift. Work closely with designers to bring interfaces to life."
+                desc="Write production-ready code in React, Python, or Swift. Work closely with project leads and designers to bring interfaces to life."
                 commitment="4-6 hours/week"
+            />
+            <RoleCard
+                title = "Designer"
+                icon={<Check className="w-8 h-8 text-blue-500" />}
+                desc="Craft user experiences and interfaces using Figma. Collaborate with developers to ensure pixel-perfect implementation."
+                commitment="3-5 hours/week"
             />
             <RoleCard 
                 title="Project Manager" 
@@ -50,11 +56,10 @@ export default function Join() {
         {/* Timeline */}
         <div className="bg-slate-900/50 border border-white/10 rounded-3xl p-8 md:p-12">
             <h2 className="text-3xl font-bold text-white mb-8 text-center">Recruitment Timeline</h2>
-            <div className="grid md:grid-cols-4 gap-4 text-center">
-                 <TimelineStep step="1" title="Application" desc="Submit your resume and portfolio online." />
-                 <TimelineStep step="2" title="Behavioral" desc="Chat with the board about your goals." />
-                 <TimelineStep step="3" title="Technical" desc="Whiteboard or take-home challenge." />
-                 <TimelineStep step="4" title="Decision" desc="Welcome to the team." isLast />
+            <div className="grid md:grid-cols-3 gap-4 text-center">
+                 <TimelineStep step="1" title="Application" desc="Submit your application through our form." />
+                 <TimelineStep step="2" title="Interview" desc="Chat with the board about your skills and goals." />
+                 <TimelineStep step="4" title="Decision" desc="We'd love for you to join the team!" isLast />
             </div>
         </div>
 
@@ -63,17 +68,17 @@ export default function Join() {
   );
 }
 
-function RoleCard({ title, icon, desc, commitment }: { title: string, icon: any, desc: string, commitment: string }) {
+function RoleCard({ title, icon, desc, commitment }: { title: string, icon: React.ReactNode, desc: string, commitment: string }) {
     return (
-        <div className="bg-slate-900/40 border border-white/10 p-8 rounded-3xl hover:bg-slate-900/80 transition-all duration-300 hover:-translate-y-1">
+        <div className="flex flex-col h-full bg-slate-900/40 border border-white/10 p-8 rounded-3xl hover:bg-slate-900/80 transition-all duration-300 hover:-translate-y-1">
             <div className="bg-white/5 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 border border-white/5">
                 {icon}
             </div>
             <h3 className="text-2xl font-bold text-white mb-3">{title}</h3>
-            <p className="text-slate-400 mb-6 leading-relaxed text-sm h-20">
+            <p className="text-slate-400 mb-6 leading-relaxed text-sm grow">
                 {desc}
             </p>
-            <div className="flex items-center gap-2 text-sm font-bold text-slate-300 bg-white/5 p-3 rounded-xl border border-white/5">
+            <div className="mt-auto flex items-center gap-2 text-sm font-bold text-slate-300 bg-white/5 p-3 rounded-xl border border-white/5">
                 <div className="w-2 h-2 rounded-full bg-bits-bright-orange animate-pulse"></div>
                 {commitment}
             </div>

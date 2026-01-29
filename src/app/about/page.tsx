@@ -7,6 +7,8 @@ import joeychen from '../../../public/LeadershipProfiles/joeychen.jpeg'
 import yashvasinsana from '../../../public/LeadershipProfiles/yashvasinsana.jpeg'
 import farhanuddin from '../../../public/LeadershipProfiles/farhanuddin.jpeg'
 import lillyterziyska from '../../../public/LeadershipProfiles/lillyterziyska.jpeg'
+import aashritayeligireddy from '../../../public/LeadershipProfiles/AashritaYeligireddy.jpeg'
+import shaymaaA from '../../../public/LeadershipProfiles/shaymaaA.jpeg'
 
 
 const leadership = [
@@ -14,8 +16,8 @@ const leadership = [
   { name: "Joey Chen", role: "External VP", src: joeychen },
   { name: "Ryan Lee", role: "Internal VP", src: ryanlee },
   { name: "Yashvasin Sana", role: "Internal Board", src: yashvasinsana},
-  { name: "Aashrita Yeligreddy", role: "Internal Board" },
-  { name: "Shaymaa", role: "Lead Project Manager"},
+  { name: "Aashrita Yeligreddy", role: "Internal Board", src: aashritayeligireddy},
+  { name: "Shaymaa", role: "Lead Project Manager", src: shaymaaA},
   { name: "Farhan Uddin", role: "Treasurer", src: farhanuddin },
   { name: "Lilly Terziyska", role: "Social Media", src: lillyterziyska },
 ];

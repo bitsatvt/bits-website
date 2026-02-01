@@ -39,6 +39,8 @@ type NormalizedEvent = {
   endDate?: Date;
   isMultiDay: boolean;
   isAllDay: boolean;
+  isToday: boolean;
+  isCurrentTime: boolean;
 };
 
 /**
@@ -164,9 +166,6 @@ export default function EventList() {
           );
           if (!startDate) continue;
 
-          // Skip events in the past
-          if (startDate < now) continue;
-
           // Parse end date (optional field)
           const endDateRaw = parseGoogleDate(
             event.end?.dateTime ?? event.end?.date,
@@ -179,8 +178,22 @@ export default function EventList() {
               ? new Date(endDateRaw.getTime() - 86400000)
               : endDateRaw;
 
+          // Skip events that have already ended
+          const eventEndTime = endDate || startDate;
+          if (eventEndTime < now) continue;
+
           // Determine if event spans multiple calendar days
           const isMultiDay = endDate ? !isSameDay(startDate, endDate) : false;
+
+          // Check if event is happening today
+          const isToday = isSameDay(startDate, now);
+
+          // Check if event is happening at the current time (for timed events or all-day events)
+          // For all-day events, show as live for the entire day
+          // For timed events, show as live if current time is between start and end
+          const isCurrentTime =
+            isToday &&
+            (isAllDay || (startDate <= now && (!endDate || endDate >= now)));
 
           normalized.push({
             ...event,
@@ -188,6 +201,8 @@ export default function EventList() {
             endDate,
             isMultiDay,
             isAllDay,
+            isToday,
+            isCurrentTime,
           });
         }
 
@@ -265,8 +280,37 @@ export default function EventList() {
             return (
               <div
                 key={event.id}
-                className="group relative rounded-lg border border-white/10 bg-white/5 transition-all duration-300 hover:border-bits-orange/50 hover:bg-white/10 overflow-hidden"
+                className={`group relative rounded-lg border transition-all duration-300 overflow-hidden ${
+                  event.isCurrentTime
+                    ? "border-2 border-green-500 bg-white/5 hover:bg-white/10"
+                    : event.isToday
+                      ? "border-2 border-bits-orange bg-white/5 hover:bg-white/10"
+                      : "border border-white/10 bg-white/5 hover:border-bits-orange/50 hover:bg-white/10"
+                }`}
               >
+                {event.isCurrentTime && (
+                  <div className="absolute top-3 right-3 z-10">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-500 text-green-950 text-xs font-semibold rounded-full">
+                      <span className="w-2 h-2 bg-green-950 rounded-full animate-pulse"></span>
+                      Live Now!
+                    </span>
+                  </div>
+                )}
+                {event.isAllDay && event.isToday && !event.isCurrentTime && (
+                  <div className="absolute top-3 right-3 z-10">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-500 text-green-950 text-xs font-semibold rounded-full">
+                      <span className="w-2 h-2 bg-green-950 rounded-full animate-pulse"></span>
+                      Live Now!
+                    </span>
+                  </div>
+                )}
+                {event.isToday && !event.isCurrentTime && !event.isAllDay && (
+                  <div className="absolute top-3 right-3 z-10">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-bits-orange-500 text-bits-orange-900 text-xs font-semibold rounded-full">
+                      Starting Soon!
+                    </span>
+                  </div>
+                )}
                 <div className="relative p-6 flex flex-col sm:flex-row gap-6">
                   {/* Date Section */}
                   <div className="flex-shrink-0 sm:w-48">

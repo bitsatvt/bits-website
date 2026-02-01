@@ -38,6 +38,7 @@ type NormalizedEvent = {
   startDate: Date;
   endDate?: Date;
   isMultiDay: boolean;
+  isAllDay: boolean;
 };
 
 /**
@@ -154,6 +155,9 @@ export default function EventList() {
 
         // Parse and normalize events
         for (const event of data) {
+          // Detect if event is all-day (has 'date' field instead of 'dateTime')
+          const isAllDay = !event.start.dateTime && !!event.start.date;
+
           // Parse start date (required field)
           const startDate = parseGoogleDate(
             event.start.dateTime ?? event.start.date,
@@ -164,9 +168,16 @@ export default function EventList() {
           if (startDate < now) continue;
 
           // Parse end date (optional field)
-          const endDate = parseGoogleDate(
+          const endDateRaw = parseGoogleDate(
             event.end?.dateTime ?? event.end?.date,
           );
+
+          // For all-day events, Google Calendar returns end date as exclusive (next day)
+          // So we need to subtract one day to get the actual event end date
+          const endDate =
+            isAllDay && endDateRaw
+              ? new Date(endDateRaw.getTime() - 86400000)
+              : endDateRaw;
 
           // Determine if event spans multiple calendar days
           const isMultiDay = endDate ? !isSameDay(startDate, endDate) : false;
@@ -176,6 +187,7 @@ export default function EventList() {
             startDate,
             endDate,
             isMultiDay,
+            isAllDay,
           });
         }
 
@@ -264,8 +276,9 @@ export default function EventList() {
                     <p className="text-2xl font-semibold text-white leading-tight mb-2">
                       {dateStr}
                     </p>
-                    {event.startDate.getHours() !== 0 ||
-                    event.startDate.getMinutes() !== 0 ? (
+                    {!event.isAllDay &&
+                    (event.startDate.getHours() !== 0 ||
+                      event.startDate.getMinutes() !== 0) ? (
                       <p className="text-sm text-gray-400">
                         {formatTime(event.startDate)}
                         {event.endDate &&

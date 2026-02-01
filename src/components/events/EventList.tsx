@@ -9,17 +9,16 @@ import { MapPin } from "lucide-react";
  */
 
 /**
- * Raw event structure from Google Calendar API
- * Supports both timed events (dateTime) and all-day events (date)
+ * API event structure from Google Calendar
  */
-type CalendarEvent = {
+type ApiEvent = {
   id: string;
   summary?: string;
   location?: string;
   description?: string;
   start: {
-    dateTime?: string; // ISO 8601 format (e.g., "2026-02-10T17:00:00-05:00")
-    date?: string; // YYYY-MM-DD format (e.g., "2026-02-16")
+    dateTime?: string;
+    date?: string;
   };
   end?: {
     dateTime?: string;
@@ -31,12 +30,14 @@ type CalendarEvent = {
  * Normalized event with parsed dates and computed properties
  * Used internally after processing from raw API response
  */
-type NormalizedEvent = Omit<CalendarEvent, "start" | "end"> & {
-  startDate: Date; // Parsed JavaScript Date object
-  endDate?: Date; // Optional end date for multi-day events
-  isMultiDay: boolean; // True if event spans multiple days
-  start: CalendarEvent["start"];
-  end?: CalendarEvent["end"];
+type NormalizedEvent = {
+  id: string;
+  summary?: string;
+  location?: string;
+  description?: string;
+  startDate: Date;
+  endDate?: Date;
+  isMultiDay: boolean;
 };
 
 /**
@@ -147,7 +148,7 @@ export default function EventList() {
         if (!res.ok) throw new Error("Failed to load events");
         return res.json();
       })
-      .then((data: CalendarEvent[]) => {
+      .then((data: ApiEvent[]) => {
         const now = new Date();
         const normalized: NormalizedEvent[] = [];
 

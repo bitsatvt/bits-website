@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import logo from "../../public/logo.png";
+import logo from "@public/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

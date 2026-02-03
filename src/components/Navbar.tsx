@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import logo from "../../public/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,11 +26,11 @@ const Navbar = () => {
               <div className="relative">
                  {/* Make sure your logo PNG is white/transparent or it might look odd on black */}
                  <Image 
-                   src="/logo.png" 
+                   src={logo} 
                    alt="BITS Logo" 
                    width={180} 
                    height={120} 
-                   className="object-contain" // Added invert since original logo was likely black
+                   className="object-contain"
                  />
               </div>
             </Link>

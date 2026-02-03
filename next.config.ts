@@ -16,6 +16,11 @@ const nextConfig: NextConfig = {
   basePath: "/bits-website",
 
   /**
+   * Set asset prefix to match base path for static assets.
+   */
+  assetPrefix: "/bits-website",
+
+  /**
    * Disable server-based image optimization. Next.js does not support
    * dynamic features with static exports.
    *

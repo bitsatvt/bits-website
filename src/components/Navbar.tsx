@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -24,7 +23,7 @@ const Navbar = () => {
             <Link href="/" className="flex items-center gap-2">
               <div className="relative">
                  {/* Make sure your logo PNG is white/transparent or it might look odd on black */}
-                 <Image 
+                 <img 
                    src="/logo.png" 
                    alt="BITS Logo" 
                    width={180} 

@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar";
-import Image from "next/image";
 
 import ryanlee from '../../../public/LeadershipProfiles/ryanlee.jpeg'
 import jaydonbingham from '../../../public/LeadershipProfiles/jaydonbingham.jpeg'
@@ -10,6 +9,11 @@ import lillyterziyska from '../../../public/LeadershipProfiles/lillyterziyska.jp
 import aashritayeligireddy from '../../../public/LeadershipProfiles/AashritaYeligireddy.jpeg'
 import shaymaaA from '../../../public/LeadershipProfiles/shaymaaA.jpeg'
 
+
+import ideation from '../../../public/AboutImages/ideation.png'
+import wireframe from '../../../public/AboutImages/wireframe2.png'
+import prototype from '../../../public/AboutImages/prototype.png'
+import group from '../../../public/AboutImages/groupPicture.png'
 
 const leadership = [
   { name: "Jaydon Bingham", role: "President", src: jaydonbingham  },
@@ -23,10 +27,10 @@ const leadership = [
 ];
 
 const workflow = [
-    { title: "Ideation", desc: "Identifying real-world problems and brainstorming impactful tech solutions.", step: "01" },
-    { title: "Wireframing", desc: "Mapping user flows and low-fidelity structures to nail the UX early.", step: "02" },
-    { title: "Prototyping", desc: "Building high-fidelity mockups and functional MVPs to test core logic.", step: "03" },
-    { title: "Weekly Sprints", desc: "Iterative development cycles with small, manageable tasks for rapid shipping.", step: "04" },
+    { title: "Ideation", desc: "Identifying real-world problems and brainstorming impactful tech solutions. We believe everyone can contribute ideas that can turn a good project, into a great project.", step: "01", src: ideation },
+    { title: "Wireframing", desc: "Mapping user flows and low-fidelity structures to nail the UX early. Our teams work directly with clients to ensure their needs are met before any development begins.", step: "02", src: wireframe},
+    { title: "Prototyping", desc: "Building high-fidelity mockups and functional MVPs to test core logic. We take advantage of modern frameworks to scale quickly, using Git and Github to streamline version control and team collaboration.", step: "03", src: prototype },
+    { title: "Weekly Sprints", desc: "Iterative development cycles with small, manageable tasks for rapid shipping. Meet with your team, project leads, and clients to share progress across different issues.", step: "04", src: group },
 ];
 
 export default function About() {
@@ -53,29 +57,50 @@ export default function About() {
 
          <div className="border-t border-white/10 pt-16 mb-24">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-                <h2 className="text-4xl font-bold text-white">Our <span className = "text-bits-bright-orange">Agile</span> Workflow.</h2>
+                <h2 className="text-6xl font-bold text-white">Our <span className = "text-bits-bright-orange">Agile</span> Workflow.</h2>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {workflow.map((item, i) => (
-                    <div key={i} className="group relative p-8 rounded-2xl bg-white/5 border border-white/10 hover:cursor-default transition-colors">
-                        <span className="text-md font-mono text-bits-orange/60 mb-4 block">{item.step}</span>
-                        <h3 className="text-2xl font-bold text-white mb-2">{item.title}</h3>
-                        <p className="text-slate-400 text-lg leading-relaxed">{item.desc}</p>
+            <div className="flex flex-col gap-16 md:gap-24">
+            {workflow.map((item, i) => (
+                <div 
+                    key={i} 
+                    className="flex flex-col md:flex-row items-center gap-12 group"
+                >
+                {/* Text Content */}
+                <div className="flex-1 space-y-4">
+                    <span className="text-md font-mono text-bits-orange/60 block">
+                        {item.step}
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-bold text-white">
+                        {item.title}
+                    </h3>
+                    <p className="text-slate-400 text-lg md:text-xl leading-relaxed max-w-xl">
+                        {item.desc}
+                    </p>
+                </div>
+
+                {/* Image Container */}
+                <div className="flex-1 w-full">
+                    <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-slate-800 aspect-video">
+                        <img
+                            src={item.src.src} 
+                            alt={item.title}
+                            className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
                     </div>
-                ))}
+                </div>
             </div>
+    ))}
+    </div>
          </div>
-
-
          <div className="border-t border-white/10 pt-16">
             <h2 className="text-4xl font-bold text-white mb-12 text-center lg:text-left ">Executive Board</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {leadership.map((person, i) => (
-                    <div key={i} className="flex flex-col gap-4 items-center m-20 sm:items-start md:m-15 lg:m-0 duration-250 pb-3 rounded-3xl hover:bg-white/5">
+                    <div key={i} className="flex flex-col gap-4 items-center m-10 sm:items-start md:m-15 lg:m-0 duration-250 pb-3 rounded-3xl hover:bg-white/10">
                         {person.src && (
-                            <Image
-                             src = {person.src}
+                            <img
+                             src = {person.src.src}
                              alt = {person.name}
                              className="w-full bg-slate-800 border border-white/10"
                              />

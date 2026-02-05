@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 import { ArrowRight, Code2, Rocket, Users, Zap, Layers } from "lucide-react";
+import unmannedIndustries from '../../public/HomePageImage/unmanned.png'
 
 export default function Home() {
   return (
@@ -36,10 +37,10 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto relative z-20">
             <Link
-              href="/partners"
+              href="/about"
               className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-slate-300 bg-bits-orange backdrop-blur-sm border border-white/10 rounded-full hover:bg-bits-bright-orange hover:text-white hover:scale-105 transition-all duration-200 shadow-sm"
             >
-              Partner with Us
+              About Us
             </Link>
 
             <Link
@@ -96,12 +97,11 @@ export default function Home() {
 
                 {/* Center Icon/Preview */}
                 <div className="relative text-center p-8 transform group-hover:scale-105 transition-transform duration-500">
-                  <div className="w-24 h-24 bg-white/5 backdrop-blur-md rounded-3xl flex items-center justify-center mx-auto mb-6 border border-white/10 shadow-2xl">
-                    <Layers className="text-bits-orange w-12 h-12" />
-                  </div>
-                  <p className="text-slate-500 font-medium text-sm tracking-wide uppercase">
-                    Project Preview
-                  </p>
+                  <img
+                    src = {unmannedIndustries.src}
+                    alt = "Unmanned Industries Drone Home Page"
+                    className="mx-auto rounded-lg border border-white/10 shadow-lg"
+                  />
                 </div>
               </div>
             </div>

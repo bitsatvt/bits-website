@@ -1,7 +1,44 @@
+"use client"
 import Navbar from "@/components/Navbar";
 import { CheckCircle2, TrendingUp, Users, Zap } from "lucide-react";
 
 export default function Partners() {
+
+//   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+//     event.preventDefault();
+//     const formData = new FormData(event.currentTarget);
+//     //await sendSimpleMessage(formData);
+//   }
+
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        const form = event.currentTarget;
+
+        const body = {
+            firstName: (form.querySelector('input[placeholder="Jane"]') as HTMLInputElement)?.value,
+            lastName: (form.querySelector('input[placeholder="Doe"]') as HTMLInputElement)?.value,
+            email: (form.querySelector('input[type="email"]') as HTMLInputElement)?.value,
+            company: (form.querySelector('input[placeholder="Tech Corp"]') as HTMLInputElement)?.value,
+            interest: (form.querySelector('select') as HTMLSelectElement)?.value,
+            message: (form.querySelector('textarea') as HTMLTextAreaElement)?.value,
+        };
+
+        console.log(body);
+
+        try {
+            await fetch('/api', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body),
+            });
+            alert('Message sent successfully!');
+            form.reset();
+        } catch (err) {
+            console.error(err);
+            alert('Failed to send message.');
+        }
+    }
+
   return (
     <>
       <Navbar />
@@ -41,7 +78,7 @@ export default function Partners() {
             {/* Right Column: Form */}
             <div className="bg-slate-900/50 backdrop-blur-md border border-white/10 p-8 rounded-3xl shadow-2xl">
                 <h3 className="text-2xl font-bold text-white mb-6">Start a Conversation</h3>
-                <form className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-5">
                     <div className="grid grid-cols-2 gap-5">
                         <InputGroup label="First Name" placeholder="Jane" />
                         <InputGroup label="Last Name" placeholder="Doe" />
@@ -64,7 +101,8 @@ export default function Partners() {
                          <textarea rows={4} className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-bits-orange focus:ring-1 focus:ring-bits-orange transition-all" placeholder="Tell us about your needs..."></textarea>
                     </div>
 
-                    <button className="w-full bg-bits-orange text-white font-bold py-4 rounded-xl shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 hover:scale-[1.02] transition-all">
+                    <button className="w-full bg-bits-orange text-white font-bold py-4 rounded-xl shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 hover:scale-[1.02] transition-all" 
+                            type="submit">
                         Send Message
                     </button>
                 </form>

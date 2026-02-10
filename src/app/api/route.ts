@@ -14,15 +14,13 @@ export async function POST(req: Request) {
   await mg.messages.create(
     'sandboxe32f5e668fe9476cb5514bec27242694.mailgun.org',
     {
-      from: `BITS at VT <postmaster@sandboxe32f5e668fe9476cb5514bec27242694.mailgun.org>`,
+      from: `${firstName} ${lastName}, ${company} <postmaster@sandboxe32f5e668fe9476cb5514bec27242694.mailgun.org>`,
       to: ['bitsatvt@gmail.com'],
-      subject: `New Form Submission from ${firstName} ${lastName}`,
+      subject: `${interest}`,
       text: `
-        Name: ${firstName} ${lastName}
         Email: ${email}
-        Company: ${company}
-        Interest: ${interest}
-        Message: ${message}
+        
+        ${message}
       `
     }
   );

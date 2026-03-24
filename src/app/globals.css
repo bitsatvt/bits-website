@@ -1,36 +1,30 @@
 @import "tailwindcss";
 
 @theme {
-  /* THE EXCLUSIVE DARK PALETTE */
-  --color-bits-bright-orange: #ff5508; /* Vibrant Tech Orange */
-  --color-bits-orange: #ee4c00; /* Vibrant Tech Orange */
-  --color-bits-yellow: #facc15; /* Accent Yellow */
-  --color-bits-red: #dc2626; /* Deep Red */
-  --color-bits-dark: #0a0a0a; /* Deep Black */
-  --color-bits-green: #53c73e; /* Bright Green */
+  /* THE INVERTED PALETTE */
+  --color-bits-bright-orange: #003AFF; /* Inverted → Cyan-Blue */
+  --color-bits-orange: #11b3ff; /* Inverted → Sky Blue */
+  --color-bits-yellow: #0533ea; /* Inverted → Deep Blue */
+  --color-bits-red: #23d9d9; /* Inverted → Cyan */
+  --color-bits-dark: #f5f5f5; /* Inverted → Near White */
+  --color-bits-green: #ac38c1; /* Inverted → Purple */
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   /* Animation settings */
   --animate-blob: blob 10s infinite alternate;
-
-  @keyframes blob {
-    0% {
-      transform: translate(0px, 0px) scale(1);
-    }
-    33% {
-      transform: translate(30px, -50px) scale(1.2);
-    }
-    66% {
-      transform: translate(-20px, 20px) scale(0.8);
-    }
-    100% {
-      transform: translate(0px, 0px) scale(1);
-    }
+  @keyframes drift {
+    0% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(15vw, 15vh) scale(1.2); }
+    50% { transform: translate(35vw, -5vh) scale(1); }
+    75% { transform: translate(10vw, 20vh) scale(1.2); }
+    100% { transform: translate(0, 0) scale(1); }
   }
+
+
 }
 
-/* FILM GRAIN TEXTURE (Inverted for Dark Mode) */
+/* FILM GRAIN TEXTURE (For Light Mode) */
 @layer utilities {
   .bg-noise {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
